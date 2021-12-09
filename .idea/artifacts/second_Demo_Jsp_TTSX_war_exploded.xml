@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="second_Demo_Jsp_TTSX:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/second_Demo_Jsp_TTSX_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="second_Demo_Jsp_TTSX/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="second_Demo_Jsp_TTSX" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
