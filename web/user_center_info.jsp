@@ -73,59 +73,70 @@
         <h3 class="common_title2">最近浏览</h3>
         <div class="has_view_list">
             <ul class="goods_type_list clearfix">
-                <c:if test="${userInfo==null}">
+                <c:if test="${browseInfo==null}">
                     请先<a href="login.jsp" style="color: red">登录</a>,登陆后查看浏览信息!
                 </c:if>
-                <c:if test="${userInfo!=null}">
-                <li>
-                    <a href="detail.jsp" ><img src="${pageContext.request.contextPath}/image/goods003.jpg"></a>
-                    <h4><a href="detail.jsp">大兴大棚草莓</a></h4>
-                    <div class="operate">
-                        <span class="prize">￥16.80</span>
-                        <span class="unit">16.80/500g</span>
-                        <a href="#" class="add_goods" title="加入购物车"></a>
-                    </div>
-                </li>
+                <c:if test="${browseInfo!=null}">
+                    <c:forEach items="${browseInfo}" var="browse">
+                                        <li>
+                                            <a href="detail.jsp" ><img src="${pageContext.request.contextPath}/${browse.browseGoodsPic}"></a>
+                                            <h4><a href="detail.jsp">${browse.browseGoodsName}</a></h4>
+                                            <div class="operate">
+                                                <span class="prize">${browse.browseGoodsPrice}</span>
+                                                <span class="unit">${browse.browseGoodsPrice}/500g</span>
+                                                <a href="#" class="add_goods" title="加入购物车"></a>
+                                            </div>
+                                        </li>
+                    </c:forEach>
+<%--                <li>--%>
+<%--                    <a href="detail.jsp" ><img src="${pageContext.request.contextPath}/image/goods003.jpg"></a>--%>
+<%--                    <h4><a href="detail.jsp">大兴大棚草莓</a></h4>--%>
+<%--                    <div class="operate">--%>
+<%--                        <span class="prize">￥16.80</span>--%>
+<%--                        <span class="unit">16.80/500g</span>--%>
+<%--                        <a href="#" class="add_goods" title="加入购物车"></a>--%>
+<%--                    </div>--%>
+<%--                </li>--%>
 
-                <li>
-                    <a href="#"><img src="${pageContext.request.contextPath}/image/goods004.jpg"></a>
-                    <h4><a href="#">吐鲁番梨光杏</a></h4>
-                    <div class="operate">
-                        <span class="prize">￥5.50</span>
-                        <span class="unit">5.50/500g</span>
-                        <a href="#" class="add_goods" title="加入购物车"></a>
-                    </div>
-                </li>
+<%--                <li>--%>
+<%--                    <a href="#"><img src="${pageContext.request.contextPath}/image/goods004.jpg"></a>--%>
+<%--                    <h4><a href="#">吐鲁番梨光杏</a></h4>--%>
+<%--                    <div class="operate">--%>
+<%--                        <span class="prize">￥5.50</span>--%>
+<%--                        <span class="unit">5.50/500g</span>--%>
+<%--                        <a href="#" class="add_goods" title="加入购物车"></a>--%>
+<%--                    </div>--%>
+<%--                </li>--%>
 
-                <li>
-                    <a href="#"><img src="${pageContext.request.contextPath}/image/goods005.jpg"></a>
-                    <h4><a href="#">黄肉桃</a></h4>
-                    <div class="operate">
-                        <span class="prize">￥10.00</span>
-                        <span class="unit">10.00/500g</span>
-                        <a href="#" class="add_goods" title="加入购物车"></a>
-                    </div>
-                </li>
+<%--                <li>--%>
+<%--                    <a href="#"><img src="${pageContext.request.contextPath}/image/goods005.jpg"></a>--%>
+<%--                    <h4><a href="#">黄肉桃</a></h4>--%>
+<%--                    <div class="operate">--%>
+<%--                        <span class="prize">￥10.00</span>--%>
+<%--                        <span class="unit">10.00/500g</span>--%>
+<%--                        <a href="#" class="add_goods" title="加入购物车"></a>--%>
+<%--                    </div>--%>
+<%--                </li>--%>
 
-                <li>
-                    <a href="#"><img src="${pageContext.request.contextPath}/image/goods006.jpg"></a>
-                    <h4><a href="#">进口西梅</a></h4>
-                    <div class="operate">
-                        <span class="prize">￥28.80</span>
-                        <span class="unit">28.8/500g</span>
-                        <a href="#" class="add_goods" title="加入购物车"></a>
-                    </div>
-                </li>
+<%--                <li>--%>
+<%--                    <a href="#"><img src="${pageContext.request.contextPath}/image/goods006.jpg"></a>--%>
+<%--                    <h4><a href="#">进口西梅</a></h4>--%>
+<%--                    <div class="operate">--%>
+<%--                        <span class="prize">￥28.80</span>--%>
+<%--                        <span class="unit">28.8/500g</span>--%>
+<%--                        <a href="#" class="add_goods" title="加入购物车"></a>--%>
+<%--                    </div>--%>
+<%--                </li>--%>
 
-                <li>
-                    <a href="#"><img src="${pageContext.request.contextPath}/image/goods007.jpg"></a>
-                    <h4><a href="#">香梨</a></h4>
-                    <div class="operate">
-                        <span class="prize">￥6.45</span>
-                        <span class="unit">6.45/500g</span>
-                        <a href="#" class="add_goods" title="加入购物车"></a>
-                    </div>
-                </li>
+<%--                <li>--%>
+<%--                    <a href="#"><img src="${pageContext.request.contextPath}/image/goods007.jpg"></a>--%>
+<%--                    <h4><a href="#">香梨</a></h4>--%>
+<%--                    <div class="operate">--%>
+<%--                        <span class="prize">￥6.45</span>--%>
+<%--                        <span class="unit">6.45/500g</span>--%>
+<%--                        <a href="#" class="add_goods" title="加入购物车"></a>--%>
+<%--                    </div>--%>
+<%--                </li>--%>
                 </c:if>
             </ul>
         </div>

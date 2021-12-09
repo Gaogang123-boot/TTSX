@@ -1,8 +1,11 @@
 package com.ttsx.web;
 
+import com.ttsx.dao.BrowseDao;
 import com.ttsx.dao.GoodsDao;
+import com.ttsx.daoImpl.BrowseDaoImpl;
 import com.ttsx.daoImpl.GoodsDaoImpl;
 import com.ttsx.entiy.Goods;
+import com.ttsx.entiy.UserInfo;
 import com.ttsx.util.PageUtils;
 import org.apache.log4j.Logger;
 
@@ -18,6 +21,7 @@ import java.util.List;
 public class GoodsServlet extends BaseServlet{
     //实例化goodsDao
     private GoodsDao goodsDao = new GoodsDaoImpl();
+    private BrowseDao browseDao = new BrowseDaoImpl();
     private Logger logger = Logger.getLogger("log4j.properties");
     /**
      * 获得所有商品信息
@@ -72,11 +76,19 @@ public class GoodsServlet extends BaseServlet{
      */
     protected void findGoodsById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("根据编号查询产品");
+        //获取session判断用户是否登录
+        UserInfo userInfo = (UserInfo)request.getSession().getAttribute("userInfo");
         String  goodsId = request.getParameter("goodsId");
         Goods oneGoods = goodsDao.findGoodsById(goodsId);
         HttpSession session = request.getSession();
         session.setAttribute("oneGoods",oneGoods);
-        response.sendRedirect("detail.jsp");
+        if (userInfo==null){
+            response.sendRedirect("detail.jsp");
+        }else {
+            browseDao.insBrowseInfo(oneGoods.getGoodsPic(),oneGoods.getGoodsName(),oneGoods.getGoodsPrice(),userInfo.getUserId());
+            response.sendRedirect("detail.jsp");
+        }
+
     }
 
 }

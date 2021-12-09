@@ -1,8 +1,11 @@
 package com.ttsx.web;
 
+import com.ttsx.dao.BrowseDao;
 import com.ttsx.dao.UserInfoDao;
+import com.ttsx.daoImpl.BrowseDaoImpl;
 import com.ttsx.daoImpl.UserInfoDaoImpl;
 import com.ttsx.entiy.AddressInfo;
+import com.ttsx.entiy.Browse;
 import com.ttsx.entiy.UserInfo;
 import org.apache.log4j.Logger;
 
@@ -13,10 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet("/user")
 public class UserInfoServlet extends BaseServlet{
     private UserInfoDao userInfoDao = new UserInfoDaoImpl();
+    private BrowseDao browseDao = new BrowseDaoImpl();
     private Logger logger = Logger.getLogger("log4j.properties");
     /**
      * 用户登录
@@ -41,7 +46,19 @@ public class UserInfoServlet extends BaseServlet{
         }
 
     }
-
+    /**
+     * 最近浏览信息
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void browseInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        UserInfo userInfo = (UserInfo) request.getSession().getAttribute("userInfo");
+        List<Browse> browseInfo = browseDao.getBrowseInfo(userInfo.getUserId());
+        request.getSession().setAttribute("browseInfo",browseInfo);
+//        response.sendRedirect("index2.jsp");
+    }
     /**
      * 获取用户信息和地址
      * 待：获取用户登录信息
@@ -57,6 +74,7 @@ public class UserInfoServlet extends BaseServlet{
             AddressInfo address = userInfoDao.getAddress(userInfo.getUserId());
             System.out.println(address.toString());
             request.getSession().setAttribute("Address",address);
+            browseInfo(request,response);
             response.sendRedirect("user_center_info.jsp");
         }else {
             response.sendRedirect("user_center_info.jsp");
@@ -73,9 +91,9 @@ public class UserInfoServlet extends BaseServlet{
      */
     protected void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        UserInfo userInfo = (UserInfo)session.getAttribute("userInfo");
         session.removeAttribute("userInfo");
-        logger.info(userInfo.getUserName()+"退出登录");
+        session.removeAttribute("browseInfo");
+        logger.info("退出登录");
         response.sendRedirect("index.jsp");
     }
 }
