@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -89,7 +90,7 @@
                 <h3>${oneGoods.goodsName}</h3>
                 <p>${oneGoods.goodsShows}</p>
                 <div class="prize_bar">
-                    <span class="show_pirze">¥<em>${oneGoods.goodsPrice}</em></span>
+                    <span class="show_pirze"><em><fmt:formatNumber value="${oneGoods.goodsPrice}" type="currency"></fmt:formatNumber></em></span>
                     <span class="show_unit">单  位：500g</span>
                 </div>
                 <div class="goods_num clearfix">

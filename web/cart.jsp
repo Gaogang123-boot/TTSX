@@ -5,6 +5,8 @@
     <title>天天生鲜-购物车</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/my.css">
+    <script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
 </head>
 <body>
 <div class="header_con">
@@ -42,9 +44,43 @@
     <a href="index2.jsp" class="logo fl"><img src="${pageContext.request.contextPath}/image/logo.png"></a>
     <div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;购物车</div>
     <div class="search_con fr">
-        <input type="text" class="input_text fl" name="" placeholder="搜索商品">
+        <input type="text" class="input_text fl searchGoods" name="content" placeholder="搜索商品">
         <input type="button" class="input_btn fr" name="" value="搜索">
+        <script>
+            $(function () {
+                $(".searchGoods").keyup(function () {
+                    $.ajax({
+                        url:"goods",
+                        type:"post",
+                        data:{
+                            "method":"searchGoods",
+                            "content":$(this).val()
+                        },
+                        dataType:"json",
+                        success:function (data) {
+                            $("#mySearchDiv").css({"display":"block"})
+
+                            var msg = "";
+                            $.each(data,function (index, k) {
+                                msg+="<div class='serachContent'><a href='goods?method=findGoodsById&goodsId="+k.goodsId+"'>"+k.goodsName+"</a></div>"
+                            });
+                            // $(".serachContent").mouseover(function () {
+                            //   $(this).css({"background":"gray"})
+                            // });
+                            $("#mySearchDiv").html(msg);
+                        }
+                    });
+                });
+
+            })
+        </script>
     </div>
+    <div id="mySearchDiv" onmouseleave="divClose()" style="overflow: hidden;overflow-y:scroll;height:300px;display: none;border:1px solid forestgreen;width: 617px;background:white;position: absolute;z-index: 5;left: 48vw;top: 7.6vw"></div>
+    <script>
+        function divClose(){
+            document.getElementById("mySearchDiv").style.display="none";
+        }
+    </script>
 </div>
 
 <div class="total_count">全部商品<em>2</em>件</div>

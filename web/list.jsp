@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
 <html>
 <head>
     <title>天天生鲜-商品列表</title>
@@ -113,8 +114,8 @@
                             <a href="goods?method=findGoodsById&goodsId=${gap.goodsId}"><img src="${pageContext.request.contextPath}/${gap.goodsPic}"></a>
                             <h4><a href="goods?method=findGoodsById&goodsId=${gap.goodsId}">${gap.goodsName}</a></h4>
                             <div class="operate">
-                                <span class="prize">${gap.goodsPrice}</span>
-                                <span class="unit">${gap.goodsPrice}/500g</span>
+                                <span class="prize"><fmt:formatNumber value="${gap.goodsPrice}" type="currency"></fmt:formatNumber></span>
+                                <span class="unit"><fmt:formatNumber value="${gap.goodsPrice}" type="currency"></fmt:formatNumber>/500g</span>
                                 <a href="#" class="add_goods" title="加入购物车"></a>
                             </div>
                         </li>

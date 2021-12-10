@@ -1,0 +1,18 @@
+
+#mySearchDiv>div:nth-of-type(1){
+    margin-top: 5px;
+}
+.serachContent{
+    height: 20px;
+    font-size: 12px;
+    padding-left: 36px;
+
+}
+.serachContent a{
+    font-family: "微软雅黑";
+    text-decoration: none;
+    color: #666666;
+}
+.serachContent:hover{
+    background: #EEEEEE;
+}

@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
 
 public class BaseServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
         //通过反射动态调用方法
         //1、获得字节码对象
         Class clazz = this.getClass();

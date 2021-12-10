@@ -74,4 +74,16 @@ public class GoodsDaoImpl implements GoodsDao {
         String sql = "SELECT COUNT(*) FROM goods_type,goods WHERE goods_type.`type_id`=goods.`type_id` AND goods_type.`type_name`=?";
         return jdbcTemplate.queryForObject(sql,Integer.class,goodsName);
     }
+
+    /**
+     * 搜索框搜索
+     * 模糊查询
+     * @param goodsName
+     * @return
+     */
+    @Override
+    public List<Goods> searchGoods(String goodsName) {
+        String sql = "SELECT * FROM goods WHERE goods_name LIKE '%"+goodsName+"%'";
+        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Goods.class));
+    }
 }

@@ -1,5 +1,6 @@
 package com.ttsx.web;
 
+import com.alibaba.fastjson.JSON;
 import com.ttsx.dao.BrowseDao;
 import com.ttsx.dao.GoodsDao;
 import com.ttsx.daoImpl.BrowseDaoImpl;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet("/goods")
@@ -91,4 +93,21 @@ public class GoodsServlet extends BaseServlet{
 
     }
 
+    /**
+     * 商品主页面查询商品模糊查询
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void searchGoods(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String content = request.getParameter("content");
+        List<Goods> searchGoodsList = goodsDao.searchGoods(content);
+        response.setContentType("text/html;charset=utf-8");
+        PrintWriter out = response.getWriter();
+        String json = JSON.toJSONString(searchGoodsList);
+        out.write(json);
+        out.flush();
+        out.close();
+    }
 }

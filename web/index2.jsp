@@ -1,29 +1,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
     <title>天天生鲜-首页</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css" >
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css" >
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/my.css" >
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/slide.js"></script>
-    <script>
-      // $(function () {
-      //   $.ajax({
-      //     url:"goodsType?method=getGoodsTypeAll",
-      //     type:"post",
-      //     datatype:"json",
-      //     success:function (data) {
-      //       //
-      //       $.each(JSON.parse(data),function (index, k) {
-      //         alert(k.typeName);
-      //       })
-      //     }
-      //
-      //   });
-      // });
-    </script>
+<%--    <style>--%>
+<%--      .serachContent{--%>
+<%--        height: 30px;--%>
+<%--        font-size: 20px;--%>
+<%--        padding-left: 40px;--%>
+
+<%--      }--%>
+<%--      .serachContent a{--%>
+<%--        font-family: "微软雅黑";--%>
+<%--        text-decoration: none;--%>
+<%--        color: darkgrey;--%>
+<%--      }--%>
+<%--      .serachContent:hover{--%>
+<%--        background: gray;--%>
+<%--      }--%>
+<%--    </style>--%>
   </head>
   <body>
   <div class="header_con">
@@ -61,9 +63,43 @@
   <div class="search_bar clearfix">
     <a href="index2.jsp" class="logo fl"><img src="${pageContext.request.contextPath}/image/logo.png"></a>
     <div class="search_con fl">
-      <input type="text" class="input_text fl" name="" placeholder="搜索商品">
+      <input type="text" class="input_text fl searchGoods" name="content" placeholder="搜索商品">
       <input type="button" class="input_btn fr" name="" value="搜索">
+      <script>
+        $(function () {
+          $(".searchGoods").keyup(function () {
+            $.ajax({
+              url:"goods",
+              type:"post",
+              data:{
+                "method":"searchGoods",
+                "content":$(this).val()
+              },
+              dataType:"json",
+              success:function (data) {
+                $("#mySearchDiv").css({"display":"block"})
+
+                var msg = "";
+                $.each(data,function (index, k) {
+                  msg+="<div class='serachContent'><a href='goods?method=findGoodsById&goodsId="+k.goodsId+"'>"+k.goodsName+"</a></div>"
+                });
+                // $(".serachContent").mouseover(function () {
+                //   $(this).css({"background":"gray"})
+                // });
+                $("#mySearchDiv").html(msg);
+              }
+            });
+          });
+
+        })
+      </script>
     </div>
+    <div id="mySearchDiv" onmouseleave="divClose()" style="overflow: hidden;overflow-y:scroll;height:300px;display: none;border:1px solid forestgreen;width: 617px;background:white;position: absolute;z-index: 5;left: 26.8vw;top: 7.6vw"></div>
+    <script>
+      function divClose(){
+        document.getElementById("mySearchDiv").style.display="none";
+      }
+    </script>
     <div class="guest_cart fr">
       <a href="#" class="cart_name fl">我的购物车</a>
       <div class="goods_count fl" id="show_count">1</div>
@@ -128,7 +164,7 @@
                   <li>
                     <h4><a href="goods?method=findGoodsById&goodsId=${gfs.goodsId}">${gfs.goodsName}</a></h4>
                     <a href="goods?method=findGoodsById&goodsId=${gfs.goodsId}"><img src="${pageContext.request.contextPath}/${gfs.goodsPic}"></a>
-                    <div class="prize">${gfs.goodsPrice}</div>
+                    <div class="prize"><fmt:formatNumber value="${gfs.goodsPrice}" type="currency"></fmt:formatNumber></div>
                   </li>
         </c:forEach>
       </ul>
@@ -153,7 +189,7 @@
                   <li>
                     <h4><a href="goods?method=findGoodsById&goodsId=${gsa.goodsId}">${gsa.goodsName}</a></h4>
                     <a href="goods?method=findGoodsById&goodsId=${gsa.goodsId}"><img src="${pageContext.request.contextPath}/${gsa.goodsPic}"></a>
-                    <div class="prize">${gsa.goodsPrice}</div>
+                    <div class="prize"><fmt:formatNumber value="${gsa.goodsPrice}" type="currency"></fmt:formatNumber></div>
                   </li>
         </c:forEach>
       </ul>

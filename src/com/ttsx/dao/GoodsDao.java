@@ -12,5 +12,6 @@ public interface GoodsDao {
     List<Goods> getGoodsSeafoodAllProduct(PageUtils page);//获得海鲜商品不分页信息
     Goods findGoodsById(String goodsId);//按商品ID查询
     int getGoodsCount(String goodsName);//商品数量
-//    int insertBrowse()
+    //商品搜索
+    List<Goods> searchGoods(String goodsName);
 }
