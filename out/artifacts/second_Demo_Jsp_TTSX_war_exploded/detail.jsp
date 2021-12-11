@@ -104,7 +104,7 @@
                 <div class="total">总价：<em>${oneGoods.goodsPrice*oneGoods.goodsNum}元</em></div>
                 <div class="operate_btn">
                     <a href="javascript:;" class="buy_btn">立即购买</a>
-                    <a href="javascript:;" class="add_cart" id="add_cart">加入购物车</a>
+                    <a href="GoodsCart?method=goodscartadd" class="add_cart" id="add_cart">加入购物车</a>
                 </div>
             </div>
 

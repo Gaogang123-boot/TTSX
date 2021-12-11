@@ -4,16 +4,32 @@ public class GoodsCart {
     private String cartId;//购物车ID
     private String userId;//用户ID
     private String goodsId;//商品ID
-    private Integer cartNum;//购物添加数量
+    private String goodsName;//商品名称
+    private String goodsPrice;//商品单价
+    private String goodsNum;//商品数量
+    private String goodsPic;//商品图片路径
+
 
     public GoodsCart() {
     }
 
-    public GoodsCart(String cartId, String userId, String goodsId, Integer cartNum) {
+    public GoodsCart(String cartId, String userId, String goodsId, String goodsName, String goodsPrice, String goodsNum, String goodsPic) {
         this.cartId = cartId;
         this.userId = userId;
         this.goodsId = goodsId;
-        this.cartNum = cartNum;
+        this.goodsName = goodsName;
+        this.goodsPrice = goodsPrice;
+        this.goodsNum = goodsNum;
+        this.goodsPic = goodsPic;
+    }
+
+    public GoodsCart(String cartId, String userId, String goodsId, String goodsName, String goodsPrice, String goodsNum) {
+        this.cartId = cartId;
+        this.userId = userId;
+        this.goodsId = goodsId;
+        this.goodsName = goodsName;
+        this.goodsPrice = goodsPrice;
+        this.goodsNum = goodsNum;
     }
 
     public String getCartId() {
@@ -40,21 +56,47 @@ public class GoodsCart {
         this.goodsId = goodsId;
     }
 
-    public Integer getCartNum() {
-        return cartNum;
+    public String getGoodsName() {
+        return goodsName;
     }
 
-    public void setCartNum(Integer cartNum) {
-        this.cartNum = cartNum;
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public String getGoodsPrice() {
+        return goodsPrice;
+    }
+
+    public void setGoodsPrice(String goodsPrice) {
+        this.goodsPrice = goodsPrice;
+    }
+
+    public String getGoodsNum() {
+        return goodsNum;
+    }
+
+    public void setGoodsNum(String goodsNum) {
+        this.goodsNum = goodsNum;
+    }
+
+    public String getGoodsPic() {
+        return goodsPic;
+    }
+
+    public void setGoodsPic(String goodsPic) {
+        this.goodsPic = goodsPic;
     }
 
     @Override
     public String toString() {
-        return "goodsCart{" +
+        return "GoodsCart{" +
                 "cartId='" + cartId + '\'' +
                 ", userId='" + userId + '\'' +
                 ", goodsId='" + goodsId + '\'' +
-                ", cartNum=" + cartNum +
+                ", goodsName='" + goodsName + '\'' +
+                ", goodsPrice='" + goodsPrice + '\'' +
+                ", goodsNum='" + goodsNum + '\'' +
                 '}';
     }
 }

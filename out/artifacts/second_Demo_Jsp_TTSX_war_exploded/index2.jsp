@@ -52,7 +52,7 @@
           <span>|</span>
           <a href="user?method=userAddressInfo">用户中心</a>
           <span>|</span>
-          <a href="cart.jsp">我的购物车</a>
+          <a href="show?method=showcart">我的购物车</a>
           <span>|</span>
           <a href="user_center_order.jsp">我的订单</a>
         </div>
@@ -101,7 +101,7 @@
       }
     </script>
     <div class="guest_cart fr">
-      <a href="#" class="cart_name fl">我的购物车</a>
+      <a href="cart.jsp" class="cart_name fl">我的购物车</a>
       <div class="goods_count fl" id="show_count">1</div>
     </div>
   </div>

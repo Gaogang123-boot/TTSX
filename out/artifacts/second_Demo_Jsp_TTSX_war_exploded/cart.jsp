@@ -93,44 +93,50 @@
     <li class="col06">操作</li>
 </ul>
 <ul class="cart_list_td clearfix">
-    <li class="col01"><input type="checkbox" name="" checked></li>
-    <li class="col02"><img src="${pageContext.request.contextPath}/image/goods012.jpg"></li>
-    <li class="col03">奇异果<br><em>25.80元/500g</em></li>
-    <li class="col04">500g</li>
-    <li class="col05">25.80元</li>
-    <li class="col06">
-        <div class="num_add">
-            <a href="javascript:;" class="add fl">+</a>
-            <input type="text" class="num_show fl" value="1">
-            <a href="javascript:;" class="minus fl">-</a>
-        </div>
-    </li>
-    <li class="col07">25.80元</li>
-    <li class="col08"><a href="javascript:;">删除</a></li>
+    <c:set var="total" value="0"/>
+    <c:set var="totnum" value="0"/>
+    <c:forEach items="${cartList}" var="gg">
+        <li class="col01"><input type="checkbox" name="" checked></li>
+        <li class="col02"><img src="${pageContext.request.contextPath}/${gg.goodsPic}"></li>
+        <li class="col03">${gg.goodsName}<br><em>${gg.goodsPrice}元/500g</em></li>
+        <li class="col04">500g</li>
+        <li class="col05">${gg.goodsPrice}元</li>
+        <li class="col06">
+            <div class="num_add">
+                <a href="javascript:;" class="add fl">+</a>
+                <input type="text" class="num_show fl" value="${gg.goodsNum}">
+                <a href="javascript:;" class="minus fl">-</a>
+            </div>
+        </li>
+        <li class="col07">${gg.goodsPrice*gg.goodsNum}元</li>
+        <li class="col08"><a href="javascript:;">删除</a></li>
+        <c:set var="total" value="${total+gg.goodsPrice*gg.goodsNum}"/>
+        <c:set var="totnum" value="${totnum+gg.goodsNum}"/>
+    </c:forEach>
 </ul>
 
-<ul class="cart_list_td clearfix">
-    <li class="col01"><input type="checkbox" name="" checked></li>
-    <li class="col02"><img src="${pageContext.request.contextPath}/image/goods003.jpg"></li>
-    <li class="col03">大兴大棚草莓<br><em>16.80元/500g</em></li>
-    <li class="col04">500g</li>
-    <li class="col05">16.80元</li>
-    <li class="col06">
-        <div class="num_add">
-            <a href="javascript:;" class="add fl">+</a>
-            <input type="text" class="num_show fl" value="1">
-            <a href="javascript:;" class="minus fl">-</a>
-        </div>
-    </li>
-    <li class="col07">16.80元</li>
-    <li class="col08"><a href="javascript:;">删除</a></li>
-</ul>
+<%--<ul class="cart_list_td clearfix">--%>
+<%--    <li class="col01"><input type="checkbox" name="" checked></li>--%>
+<%--    <li class="col02"><img src="${pageContext.request.contextPath}/image/goods003.jpg"></li>--%>
+<%--    <li class="col03">大兴大棚草莓<br><em>16.80元/500g</em></li>--%>
+<%--    <li class="col04">500g</li>--%>
+<%--    <li class="col05">16.80元</li>--%>
+<%--    <li class="col06">--%>
+<%--        <div class="num_add">--%>
+<%--            <a href="javascript:;" class="add fl">+</a>--%>
+<%--            <input type="text" class="num_show fl" value="1">--%>
+<%--            <a href="javascript:;" class="minus fl">-</a>--%>
+<%--        </div>--%>
+<%--    </li>--%>
+<%--    <li class="col07">16.80元</li>--%>
+<%--    <li class="col08"><a href="javascript:;">删除</a></li>--%>
+<%--</ul>--%>
 
 
 <ul class="settlements">
     <li class="col01"><input type="checkbox" name="" checked=""></li>
     <li class="col02">全选</li>
-    <li class="col03">合计(不含运费)：<span>¥</span><em>42.60</em><br>共计<b>2</b>件商品</li>
+    <li class="col03">合计(不含运费)：<span>¥</span><em>${total}</em><br>共计<b>${totnum}</b>件商品</li>
     <li class="col04"><a href="place_order.jsp">去结算</a></li>
 </ul>
 

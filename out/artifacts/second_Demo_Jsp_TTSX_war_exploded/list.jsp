@@ -116,7 +116,7 @@
                             <div class="operate">
                                 <span class="prize"><fmt:formatNumber value="${gap.goodsPrice}" type="currency"></fmt:formatNumber></span>
                                 <span class="unit"><fmt:formatNumber value="${gap.goodsPrice}" type="currency"></fmt:formatNumber>/500g</span>
-                                <a href="#" class="add_goods" title="加入购物车"></a>
+                                <a href="GoodsCart?method=goodscartadd2&goodsId=${gap.goodsId}" class="add_goods" title="加入购物车"></a>
                             </div>
                         </li>
                 </c:forEach>
